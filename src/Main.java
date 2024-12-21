@@ -5,7 +5,13 @@ public class Main {
         list.insertAtEnd(2);
         list.insertAtEnd(3);
         list.insertAtEnd(4);
-        list.insertNodeAt(4,10);
+        list.insertAtEnd(5);
+        list.insertAtEnd(6);
+        list.showList();
+        list.deleteAtStart();
+        list.deleteAtEnd();
+        list.showList();
+        list.deleteNodeAt(2);
         list.showList();
     }
 }

@@ -44,7 +44,7 @@ public class LinkedList {
         int count = 1; // counter to know the position of node
         Node currentNode = head;
         Node oldNode; // old not to set the newNode.next to replaced node
-        while(position - 1 != count){ // traverse the list until we reach the node before at the specified position
+        while(position - 1 != count && currentNode.next != null){ // traverse the list until we reach the node before at the specified position
             currentNode = currentNode.next;
             count++;
         }
@@ -53,6 +53,49 @@ public class LinkedList {
         newNode.next = oldNode; // linking back the newNode the replaced node
         return newNode;
     }
+
+    public Node deleteAtStart() {
+        Node nextNode; // to store node after the head
+        nextNode = head.next;
+        head.next = null;
+        head = nextNode;
+        return head;
+    }
+
+    public Node deleteAtEnd() {
+        Node currentNode = head; // current node is head node
+        while (currentNode.next != null) {
+            currentNode = currentNode.next;
+            if(currentNode.next.next == null) // if the next Node is last node stop the loop
+                break;
+            else // otherwise go to the next node
+                continue;
+        }
+        currentNode.next = null;
+        return currentNode;
+    }
+
+    public Node deleteNodeAt(int position) {
+        int count = 1;
+        Node currentNode = head;
+        if(position < 1) {
+            System.out.println("Invalid position");
+            return head;
+        }
+        if(position == 1) { // special case: if the position is 1 => simply call deleteAtStart
+            deleteAtStart();
+        }
+        while (position - 1 != count && currentNode.next != null){
+            currentNode = currentNode.next;
+            count++;
+        }
+        Node nodeToBeDeleted = currentNode.next;
+        currentNode.next = null; // optional make the node null so its treated as garbage value (optimization)
+        currentNode.next = nodeToBeDeleted.next; // link the currentNode.next to the Node linked with deleted one to prevent link from breaking
+
+        return currentNode;
+    }
+
     public void showList() {
         Node T = head;
         if (T == null) {
