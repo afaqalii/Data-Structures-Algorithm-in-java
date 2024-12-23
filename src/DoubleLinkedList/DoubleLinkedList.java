@@ -10,7 +10,6 @@ public class DoubleLinkedList {
         this.value = 0;
 
     }
-
     // METHODS
     public Node insertAtStart(int value) {
         Node newNode = new Node(value);
@@ -116,13 +115,11 @@ public class DoubleLinkedList {
     }
     public void showList() {
         Node currNode = head;
-
         if (currNode == null) {
             System.out.println("Doubly Linked List is empty");
         } else {
             System.out.println("\nForward Traversal:");
             System.out.println("==================================");
-
             // Traverse forward
             Node lastNode = null;
             while (currNode != null) {
@@ -132,16 +129,6 @@ public class DoubleLinkedList {
             }
             System.out.print("NULL");
             System.out.println("\n==================================");
-
-            // Traverse backward
-          /*  System.out.println("\nReverse Traversal:");
-            System.out.println("==================================");
-            while (lastNode != null) {
-                System.out.print("|" + lastNode.data + "|<->");
-                lastNode = lastNode.prev;
-            }
-            System.out.print("NULL");
-            System.out.println("\n==================================");*/
         }
     }
 
