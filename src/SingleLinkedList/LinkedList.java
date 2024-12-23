@@ -1,3 +1,5 @@
+package SingleLinkedList;
+
 public class LinkedList {
     Node head;
     int value;
@@ -8,7 +10,7 @@ public class LinkedList {
     }
     // insert node at the start
     public Node insertAtStart(int value){
-        Node newNode = new Node(value); // make new node by calling Node class with a value of 'value' and null pointer
+        Node newNode = new Node(value); // make new node by calling SingleLinkedList.Node class with a value of 'value' and null pointer
         newNode.next = head; // set the new node pointer to the head
         head = newNode; // set the head of the list equal to new node
         return head;
@@ -31,7 +33,7 @@ public class LinkedList {
         }
     }
     // insert at specified position
-    public Node insertNodeAt(int position,int value) {
+    public Node insertNodeAt(int position, int value) {
        if(position < 1) {
            System.out.println("Invalid position");
            return head;
@@ -66,7 +68,7 @@ public class LinkedList {
         Node currentNode = head; // current node is head node
         while (currentNode.next != null) {
             currentNode = currentNode.next;
-            if(currentNode.next.next == null) // if the next Node is last node stop the loop
+            if(currentNode.next.next == null) // if the next SingleLinkedList.Node is last node stop the loop
                 break;
             else // otherwise go to the next node
                 continue;
@@ -82,7 +84,7 @@ public class LinkedList {
             System.out.println("Invalid position");
             return head;
         }
-        if(position == 1) { // special case: if the position is 1 => simply call deleteAtStart
+        if(position == 1) { // special case: if th  e position is 1 => simply call deleteAtStart
             deleteAtStart();
         }
         while (position - 1 != count && currentNode.next != null){
@@ -91,7 +93,7 @@ public class LinkedList {
         }
         Node nodeToBeDeleted = currentNode.next;
         currentNode.next = null; // optional make the node null so its treated as garbage value (optimization)
-        currentNode.next = nodeToBeDeleted.next; // link the currentNode.next to the Node linked with deleted one to prevent link from breaking
+        currentNode.next = nodeToBeDeleted.next; // link the currentNode.next to the SingleLinkedList.Node linked with deleted one to prevent link from breaking
 
         return currentNode;
     }
