@@ -1,11 +1,11 @@
 package CircularLinkedList.SingleCircularLinkedList;
 
 public class SingleCircularLinkedList {
-    Node head;
+    Node head,tail;
     int value;
 
     public SingleCircularLinkedList(){
-        this.head = null;
+        this.head = this.tail = null;
         this.value = 0;
     }
 
@@ -14,15 +14,13 @@ public class SingleCircularLinkedList {
         Node newNode = new Node(value);
         if(head == null){ // if linked list is empty point newNode to itself
             newNode.next = newNode;
-            return head = newNode;
+            head = tail = newNode;
+            return newNode;
         } else {
-            Node currNode = head;
-            Node tempHead = head; // used to find second last node
-            while (tempHead != currNode.next)
-                currNode = currNode.next;
-            currNode.next = newNode;
-            newNode.next = tempHead;
-          return  head = newNode;
+            newNode.next = head;
+            tail.next = newNode;
+            head = newNode;
+            return newNode;
         }
     }
 
@@ -31,20 +29,17 @@ public class SingleCircularLinkedList {
         Node newNode = new Node(value);
         if(head == null) {
             newNode.next = newNode;
-            return head = newNode;
+            newNode = head = tail;
+            return newNode;
         }
-        Node currNode, tempHead;
-        tempHead = currNode = head;
-        while(tempHead != currNode.next)
-            currNode = currNode.next;
-
-        currNode.next = newNode;
-        newNode.next = tempHead;
+        newNode.next = head;
+        tail.next = newNode;
+        tail = newNode;
         return newNode;
     }
 
     //insert at any point
-    public Node insertAtAny(int position, int value) {
+    public Node insertNodeAt(int position, int value) {
         if(position < 1) { // when position is invalid
             System.out.println("Invalid position");
             return head;
@@ -94,6 +89,10 @@ public class SingleCircularLinkedList {
         return head;
     }
     public Node deleteAtEnd() {
+        if(head == null) {
+            System.out.println("List is empty");
+            return null;
+        }
         if(length() == 1)
             return head = null;
 
