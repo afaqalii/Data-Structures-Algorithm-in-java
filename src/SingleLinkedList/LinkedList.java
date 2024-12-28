@@ -1,5 +1,8 @@
 package SingleLinkedList;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class LinkedList {
     Node head;
     int value;
@@ -56,12 +59,12 @@ public class LinkedList {
         return newNode;
     }
 
-    public Node deleteAtStart() {
+    public int deleteAtStart() {
         Node nextNode; // to store node after the head
         nextNode = head.next;
         head.next = null;
         head = nextNode;
-        return head;
+        return head.data;
     }
 
     public Node deleteAtEnd() {
@@ -96,6 +99,82 @@ public class LinkedList {
         currentNode.next = nodeToBeDeleted.next; // link the currentNode.next to the SingleLinkedList.Node linked with deleted one to prevent link from breaking
 
         return currentNode;
+    }
+
+    public void MergeLists(LinkedList other) {
+        Node tempFirstCurrNode, // to store next node of currNode of first List
+             tempSecondCurrNode; // to store next node of currNode of second List
+
+        Node firstCurrNode = head; // to store currNode of first List
+        Node secondCurrNode = other.head; // to store currNode of second List
+
+        while (firstCurrNode.next != null && secondCurrNode.next != null){
+            if(secondCurrNode.next != null) { // only perform when secondNode.next is not null
+                tempFirstCurrNode = firstCurrNode.next; // assigned it to its next node;
+                firstCurrNode.next = secondCurrNode; // assigned firstNode.next to second List node
+                firstCurrNode = tempFirstCurrNode; // assigned the currNode to its next node OR increment to its next Node
+            }
+            if(firstCurrNode.next != null) {
+                tempSecondCurrNode = secondCurrNode.next;
+                secondCurrNode.next = firstCurrNode;
+                secondCurrNode = tempSecondCurrNode;
+            }
+        }
+        other.head = null;
+    }
+
+    public void nature(Node pointer) {
+        ArrayList<Node> newList = new ArrayList<>();
+        Node curr = pointer; // current node of list
+        boolean isFound = false;
+        int cycleStartPoint = 1; //point where the cycle start
+        int nodesAdded = 0; // no. of nodes added to new linked list
+        int nodesOutsideCycle = 0;
+        // iterate over the linked list until point cycle is found
+        while (!isFound && curr.next != null) {
+                if(curr == curr.next){
+                    isFound = true;
+                    System.out.println("List is snail");
+                    System.out.println("Start of node cycle: " + 1);
+                    System.out.println("No. of nodes outside cycle: " + 0);
+                    System.out.println("No. of nodes in cycle: " + 1); // Concatenate after calculation
+                }
+                if(nodesAdded == 0) { // if new linked is empty just add first node
+                    newList.add(curr);
+                    nodesAdded++;
+                    curr = curr.next;
+                } else {
+                    Node tempNode = newList.getFirst();
+                    for (int i = 1; i <= nodesAdded; i++) {
+                        if(tempNode == curr.next){
+                            isFound = true;
+                            cycleStartPoint = i;
+                            nodesOutsideCycle = cycleStartPoint - 1;
+                            System.out.println("List is snail");
+                            System.out.println("Start of node cycle: " + cycleStartPoint);
+                            System.out.println("No. of nodes outside cycle: " + nodesOutsideCycle);
+                            int nodesInCycle = (nodesAdded + 1) - nodesOutsideCycle; // Perform arithmetic first
+                            System.out.println("No. of nodes in cycle: " + nodesInCycle); // Concatenate after calculation
+                            return;
+                        } else {
+                            tempNode = tempNode.next;
+                        }
+                    }
+                    nodesAdded++;
+                    newList.add(curr);
+                    curr = curr.next;
+                }
+            }
+        System.out.println("List is snake");
+    }
+
+    public void PopulateList(int n) {
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            int d = random.nextInt(100); // Generate random numbers between 0 and 99
+            insertAtEnd(d);
+        }
+        System.out.println(n + " Nodes added with random data.");
     }
 
     public void showList() {
