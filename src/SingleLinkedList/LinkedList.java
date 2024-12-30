@@ -167,7 +167,22 @@ public class LinkedList {
             }
         System.out.println("List is snake");
     }
-
+    private boolean isEven(int num) {
+        return num % 2 == 0;
+    }
+    // method to arrange even nodes at beginning of list
+    public void arrangeEvenNodes() {
+        Node currNode  = head;
+        while (currNode.next != null) {
+            if(isEven(currNode.next.data)) {
+                Node evenNode = currNode.next;
+                currNode.next = currNode.next.next;
+                evenNode.next = head;
+                head = evenNode;
+            } else
+                currNode = currNode.next;
+        }
+    }
     public void PopulateList(int n) {
         Random random = new Random();
         for (int i = 0; i < n; i++) {

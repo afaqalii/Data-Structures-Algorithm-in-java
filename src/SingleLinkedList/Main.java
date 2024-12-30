@@ -5,7 +5,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        Node head = new Node(1);
+
+        list.PopulateList(10);
+        list.showList();
+        list.arrangeEvenNodes();
+        list.showList();
+
+        /*    Node head = new Node(1);
         Node second = new Node(2);
         Node third = new Node(3);
         Node fourth = new Node(4);
@@ -17,7 +23,7 @@ public class Main {
         fourth.next = fifth;
         fifth.next = third; // No cycle, terminate the list
 
-        list.nature(head);
+        list.nature(head);*/
 
         /*int choice;
         Scanner input = new Scanner(System.in);
